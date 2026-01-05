@@ -1,29 +1,46 @@
 {
-    "name": "sinkcup/laravel-locale-setter",
-    "description": "detect Accept-Language, setLocale, then you can use Laravel localization",
+    "name": "shaunthegeek/laravel-locale-setter",
+    "description": "detect Accept-Language, setLocale for Laravel",
     "type": "library",
     "license": "MIT",
     "authors": [
         {
-            "name": "sinkcup",
-            "homepage": "https://github.com/sinkcup",
+            "name": "Shaun",
+            "homepage": "https://github.com/shaunthegeek",
             "role": "Developer"
         }
     ],
     "autoload": {
         "psr-4": {
-            "sinkcup\\LaravelLocaleSetter\\": "src/"
+            "ShaunTheGeek\\LaravelLocaleSetter\\": "src/"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "sinkcup\\LaravelLocaleSetterTests\\": "tests/"
+            "ShaunTheGeek\\LaravelLocaleSetterTests\\": "tests/"
         }
     },
+    "replace": {
+        "sinkcup/laravel-locale-setter": "*"
+    },
     "require": {
-        "laravel/framework": ">=5.1"
+        "laravel/framework": ">=v11"
     },
     "require-dev": {
-        "phpunit/phpunit": "~5.7"
+        "orchestra/testbench": ">=v9",
+        "phpunit/phpunit": "^12.5",
+        "laravel/pint": "^1.26"
+    },
+    "scripts": {
+        "post-install-cmd": [
+            "@php -r \"copy('.git-pre-commit', '.git/hooks/pre-commit');\"",
+            "@php -r \"chmod('.git/hooks/pre-commit', 0755);\""
+        ],
+        "lint": [
+            "./vendor/bin/pint --repair"
+        ],
+        "test": [
+            "XDEBUG_MODE=coverage ./vendor/bin/phpunit --coverage-clover coverage.xml --coverage-filter src/ tests/"
+        ]
     }
 }

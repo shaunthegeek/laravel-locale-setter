@@ -1,27 +1,19 @@
 <?php
 
-namespace sinkcup\LaravelLocaleSetterTests;
+namespace ShaunTheGeek\LaravelLocaleSetterTests;
 
-use Illuminate\Contracts\Console\Kernel;
-use Illuminate\Foundation\Testing\TestCase as BaseTestCase;
+use Orchestra\Testbench\TestCase as OrchestraTestCase;
+use ShaunTheGeek\LaravelLocaleSetter\LocaleServiceProvider;
 
-abstract class TestCase extends BaseTestCase
+class TestCase extends OrchestraTestCase
 {
-    protected $locale_map;
-
-    public function setUp()
+    /**
+     * @SuppressWarnings(PHPMD.UnusedFormalParameter)
+     */
+    protected function getPackageProviders($app)
     {
-        $this->locale_map = require(__DIR__ . '/../config/locale.php');
-    }
-
-    public function createApplication()
-    {
-        $app = require __DIR__ . '/../vendor/laravel/laravel/bootstrap/app.php';
-
-        $app->register('sinkcup\LaravelLocaleSetter\LocaleServiceProvider');
-
-        $app->make('Illuminate\Contracts\Console\Kernel')->bootstrap();
-
-        return $app;
+        return [
+            LocaleServiceProvider::class,
+        ];
     }
 }
