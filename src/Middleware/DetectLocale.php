@@ -23,7 +23,7 @@ class DetectLocale
     public function handle(Request $request, Closure $next)
     {
         $firstLang = self::getFirstLang($request->server('HTTP_ACCEPT_LANGUAGE'));
-        $map = $this->app['config']['locale']['map'];
+        $map = $this->app['config']['locale']['map'] ?? [];
         $locales = empty($map) ? $this->getLocales() : [];
         $locale = self::lang2locale($firstLang, $map, $locales);
         if (empty($locale)) {
@@ -132,7 +132,7 @@ class DetectLocale
      */
     public function getLocales(): array
     {
-        $locales = $this->app['config']['locale']['locales'];
+        $locales = $this->app['config']['locale']['locales'] ?? [];
         if (! empty($locales)) {
             return $locales;
         }

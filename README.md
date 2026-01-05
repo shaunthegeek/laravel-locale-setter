@@ -22,3 +22,11 @@ composer require shaunthegeek/laravel-locale-setter
     ]);
 })
 ```
+
+## Optional
+
+If you wish to modify the configuration, please publish it first.
+
+```
+php artisan vendor:publish --tag=locale-config
+```
