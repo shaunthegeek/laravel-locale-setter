@@ -1,4 +1,4 @@
-name: Laravel 12
+name: CI
 on:
   push:
     paths-ignore:
@@ -17,10 +17,7 @@ jobs:
       image: php:8.4-cli
     steps:
       - name: Checkout
-        uses: actions/checkout@v2
-
-      - name: GitHub Environment Variables Action
-        uses: FranzDiebold/github-env-vars-action@v2.7.0
+        uses: actions/checkout@v6
 
       - name: PHPUnit
         run: |
@@ -35,8 +32,8 @@ jobs:
       - name: Lint
         run: composer run lint
 
-      - name: codecov
+      - name: Upload coverage reports to Codecov
         uses: codecov/codecov-action@v5
         with:
-          name: test
+          token: ${{ secrets.CODECOV_TOKEN }}
 
